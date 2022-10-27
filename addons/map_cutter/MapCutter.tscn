@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/map_cutter/MapCutter.gd" type="Script" id=2]
+[ext_resource path="res://addons/map_cutter/OptionSlider.tscn" type="PackedScene" id=4]
+
+[node name="MapCutter" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -980.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 2
+script = ExtResource( 2 )
+
+[node name="HSplitter" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+dragger_visibility = 1
+
+[node name="VBoxLeft" type="VBoxContainer" parent="HSplitter"]
+margin_right = 150.0
+margin_bottom = 100.0
+
+[node name="GenerateButton" type="Button" parent="HSplitter/VBoxLeft"]
+margin_right = 150.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 150, 75 )
+text = "Generate"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitter/VBoxLeft"]
+margin_top = 79.0
+margin_right = 150.0
+margin_bottom = 79.0
+
+[node name="VBoxRight" type="VBoxContainer" parent="HSplitter"]
+margin_left = 162.0
+margin_right = 1920.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AgentRadius" parent="HSplitter/VBoxRight" instance=ExtResource( 4 )]
+margin_right = 1758.0
+hint_tooltip = "The radius of the agent."
+label_text = "Agent Radius (pixels)"
+max_value = 200.0
+current_value = 42.0
+
+[node name="Simplification" parent="HSplitter/VBoxRight" instance=ExtResource( 4 )]
+margin_top = 20.0
+margin_right = 1758.0
+margin_bottom = 36.0
+hint_tooltip = "Distance between two point under which the two will be merged together."
+label_text = "Simplification Distance (pixels)"
+current_value = 20.0
+
+[node name="CircleSegments" parent="HSplitter/VBoxRight" instance=ExtResource( 4 )]
+margin_top = 40.0
+margin_right = 1758.0
+margin_bottom = 56.0
+hint_tooltip = "The amount of segments in circle shapes."
+label_text = "Number of Segments For Circles"
+min_value = 4.0
+max_value = 40.0
+current_value = 20.0
+
+[node name="Margin" parent="HSplitter/VBoxRight" instance=ExtResource( 4 )]
+margin_top = 60.0
+margin_right = 1758.0
+margin_bottom = 76.0
+hint_tooltip = "The margin of pixels around all the collision shapes."
+label_text = "Edge Margin (pixels)"
+min_value = 1.0
+max_value = 600.0
+current_value = 300.0
+
+[connection signal="pressed" from="HSplitter/VBoxLeft/GenerateButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HSplitter/VBoxLeft/GenerateButton" to="." method="_on_GenerateButton_pressed"]
